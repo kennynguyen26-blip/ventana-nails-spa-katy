@@ -82,13 +82,12 @@ const CONFIG = {
 - **Hours**: `days` uses numbers — 0 is Sunday, 1 Monday … 6 Saturday. The hours table, the footer, the green "Open today" badge at the top, and the search-engine data all read this one list.
 - **Prices and service descriptions** are in the `data` block right below the translations (identical to Richmond). Spanish versions of the same services are in `T.es.services`, in the same order.
 
-## How to put it on the internet
+## How to put it on the internet (GitHub + Vercel)
 
-Upload these to any web host: `index.html`, the `images/` folder, `favicon.ico`, `apple-touch-icon.png`, `robots.txt`, `sitemap.xml`. Do **not** upload `images-originals/` or `optimize-images.sh`.
+The folder is already a Git repository with a first commit. You only need two free accounts: **GitHub** (stores the files) and **Vercel** (publishes them). Full step-by-step instructions are in BUILD-NOTES.md under "Publishing with GitHub and Vercel".
 
-Easiest free options:
+Short version: create an empty repository on GitHub, push this folder to it with GitHub Desktop, then in Vercel click **Add New → Project**, pick the repository, leave every setting on its default (it is a plain static site, no build step) and click **Deploy**. Every later change is just: edit → commit in GitHub Desktop → Push. Vercel republishes automatically in about a minute.
 
-- **Netlify Drop** — go to app.netlify.com/drop, drag the whole folder (minus `images-originals/`) onto the page. You get a live link in seconds and can attach your own domain later.
-- **GitHub Pages**, **Cloudflare Pages**, or the hosting that comes with your domain — all work the same way: upload the files, done.
+`vercel.json` in this folder adds the security headers (content-security policy, no framing, no sniffing, HTTPS-only). `images-originals/` and `.claude/` are excluded from the upload by `.gitignore`.
 
-Once you own a domain (for example `ventananailsspakaty.com`), do a Find & Replace of `https://REPLACE-WITH-YOUR-DOMAIN.example` → your real address in these three files: `index.html`, `robots.txt`, `sitemap.xml`. Then submit `sitemap.xml` in Google Search Console.
+Once you own a domain (for example `ventananailsspakaty.com`), add it in Vercel (Project → Settings → Domains) and do a Find & Replace of `https://REPLACE-WITH-YOUR-DOMAIN.example` → your real address in these three files: `index.html`, `robots.txt`, `sitemap.xml`. Then submit `sitemap.xml` in Google Search Console.

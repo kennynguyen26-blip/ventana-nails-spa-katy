@@ -25,7 +25,7 @@ Built 2026-09-01/02 from `~/ventana-nails-spa-richmond/index.html` (1,706 lines,
 | Location | Two columns, hours + small map | Full-width rounded map with a floating cream info card (hours, contact, Directions / Call) |
 | Footer | Black | Sand with a dark bottom strip |
 
-Logo sizes changed with the layout: header 46 px, footer 64 px, language chooser 120 px. The hero no longer shows the logo (it shows photos); the logo artwork currently says "Richmond", which is another reason to lead with photos until the Katy logo arrives.
+Logo sizes changed with the layout: header 46 px, footer 64 px, language chooser 120 px. The hero shows photos rather than the logo. The Katy logo ("Ventana Nails Spa", 576 × 721) was installed on 2026-09-02 and the icons/share image were rebuilt from it.
 
 ## Katy business info (every Richmond value replaced)
 
@@ -51,18 +51,69 @@ Page weight (what a visitor downloads):
 
 | Scenario | Size |
 |---|---|
-| Above the fold (HTML + logo + 2 hero photos + first list photo) | ~0.7 MB |
-| Full first visit, scrolled to the bottom (adds the gallery) | ~1.8 MB (~1.9 MB with Google Fonts + Map) |
+| Above the fold (HTML + logo + 2 hero photos + first list photo) | ~1.0 MB |
+| Full first visit, scrolled to the bottom (adds the gallery) | ~2.2 MB (with Google Fonts + Map) |
 | Drinks tab, all 32 photos scrolled through | +8.0 MB (only if opened; loads one row at a time) |
 
 ## Still needed from you
 
 1. **Facebook URL** → `CONFIG.FACEBOOK` in `index.html`. The footer icon and the JSON-LD `sameAs` entry stay hidden until it's filled in.
 2. **Domain** → replace `https://REPLACE-WITH-YOUR-DOMAIN.example` in `index.html` (`CONFIG.SITE_URL`), `robots.txt` and `sitemap.xml`. `.example` is a reserved name that nobody can own.
-3. **Katy photos.** The current files are Richmond's. `logo.png` literally says "NAILS & SPA RICHMOND". `gallery-5.jpg` and `service-pedicure.jpg` also appear in the hero, so pick strong ones for those two names. The favicon, Apple icon and share image are rebuilt from the logo by `optimize-images.sh`.
-4. After swapping gallery photos, update `gallery.label1–6` and `gallery.alt1–6` in both languages.
+3. **Remaining Richmond photos.** Done so far (2026-09-02): the new Katy logo (`logo.png`, 576 × 721) and all six gallery photos, with captions/alt text updated in both languages. Still Richmond's: the four `service-*.jpg` list photos (`service-pedicure.jpg` also appears in the hero) and the 32 `drink-*.jpg` photos. Swap them by name and run `bash optimize-images.sh`.
 5. Optional: with `cwebp` installed (`brew install webp`), `bash optimize-images.sh --force` also writes `.webp` copies; the HTML would then need `<picture>` tags to use them.
 
 ## Drink names (as read off the photos, in order)
 
 1 Viet Coffee with Cream · 2 Red Wine · 3 White Wine · 4 Mimosa · 5 Margarita · 6 Mama Mojito · 7 Tequila Sunset · 8 Old Fashion · 9 Mango Margarita · 10 Mai Tai · 11 Strawberry Long Island · 12 Pineapple Cocktail · 13 Egg Nog · 14 Blue Margarita · 15 Malibu Sunrise · 16 Strawberry Sweet Love · 17 Long Island Iced Tea · 18 Piña Colada · 19 Watermelon Cocktail · 20 Devil Margarita · 21 Ripe Tomato · 22 Viet Coffee Cocktail (Hot or Iced) · 23 Midnight Splash · 24 Strawberry Açaí (alcohol-free) · 25 Cucumber Fresh (alcohol-free) · 26 Orange Creamsicle (alcohol-free) · 27 Creamsicle Fizz (alcohol-free) · 28 Green Tea (Iced or Hot) · 29 Coca-Cola · 30 Sprite · 31 Diet Coca-Cola · 32 Bottled Water
+
+## Security review (2026-09-02)
+
+What the site is: one static HTML page, no server code, no database, no forms, no logins, no cookies, nothing collected from visitors. That removes most web risks by design. Checked line by line:
+
+- **No secrets in the code.** No API keys, tokens or passwords anywhere (the booking link, phone and email are public business info).
+- **No inline event handlers, no `javascript:` links.** All behaviour is in one script block.
+- **Every dynamic string is escaped** (`esc()`) before being inserted with `innerHTML`, and the only data inserted comes from constants inside the file (services, drink names, hours), never from a URL, a form or a visitor.
+- **Every link that opens a new tab has `rel="noopener"`**, so the booking site, Instagram, Facebook and Google Maps cannot reach back into this page.
+- **The only third parties loaded** are Google Fonts (fonts.googleapis.com / fonts.gstatic.com) and the Google Maps embed (`www.google.com`, in a lazy-loaded iframe with `referrerpolicy="no-referrer-when-downgrade"`).
+- **Local storage** holds exactly one value, the language choice (`ventana_katy_lang`), wrapped in try/catch so private-browsing modes can't break the page.
+- **`vercel.json` adds hardening headers on every response:** a Content-Security-Policy that only allows scripts/styles from the page itself, fonts from Google, frames from Google Maps, and blocks plugins and framing by other sites (`frame-ancestors 'none'`, plus `X-Frame-Options: DENY`); `X-Content-Type-Options: nosniff`; `Referrer-Policy: strict-origin-when-cross-origin`; `Permissions-Policy` that turns off camera, microphone, location and payment APIs; and HSTS (`Strict-Transport-Security`) so browsers always use HTTPS. Images get a 30-day cache header.
+- **Repository hygiene.** `.gitignore` keeps `images-originals/` (108 MB of full-size photos), `.DS_Store` and the local `.claude/` settings out of GitHub. Nothing personal is committed except the public business details on the page.
+- Known, accepted: the CSP allows `'unsafe-inline'` for the page's own script and style blocks because they live inside `index.html` (using hashes instead would break the site every time CONFIG is edited). There is no user input on the page, so this carries no practical risk here.
+
+## Publishing with GitHub and Vercel (step by step)
+
+Two free accounts. GitHub stores your files; Vercel publishes them and gives you an https address. Do this once; afterwards every update is "commit → push" and the live site refreshes itself.
+
+**A. Create the GitHub account and the empty repository**
+
+1. Go to github.com and click **Sign up**. Use your email, pick a password, finish the verification.
+2. Once signed in, click the **+** at the top right → **New repository**.
+3. Repository name: `ventana-nails-spa-katy`. Leave it **Public** or choose **Private** (either works with Vercel). Do **not** tick "Add a README" (the folder already has one). Click **Create repository**.
+4. Leave that page open; you'll come back to it.
+
+**B. Put the folder on GitHub with GitHub Desktop (no typing needed)**
+
+1. Download GitHub Desktop from desktop.github.com, open it, and sign in with the account from step A.
+2. Menu **File → Add Local Repository…**, click **Choose…**, pick your home folder → `ventana-nails-spa-katy`, click **Add Repository**. (It is already a Git repository with one commit, so it opens straight away.)
+3. Click the big **Publish repository** button at the top. In the box that appears, make the name `ventana-nails-spa-katy`, untick "Keep this code private" if you chose Public in A3, and click **Publish repository**.
+4. Wait for the upload to finish (about 10 MB). Refresh the GitHub page from A4 and you'll see all the files.
+
+**C. Publish with Vercel**
+
+1. Go to vercel.com and click **Sign Up** → **Continue with GitHub**. Approve the connection when GitHub asks.
+2. On the Vercel dashboard click **Add New… → Project**.
+3. Find `ventana-nails-spa-katy` in the list and click **Import**. If it isn't listed, click **Adjust GitHub App Permissions** and allow access to that repository.
+4. On the settings screen change nothing: Framework Preset "Other", no build command, output directory blank. Click **Deploy**.
+5. About a minute later you'll see "Congratulations". Click **Visit**. Your site is live at an address like `ventana-nails-spa-katy.vercel.app`, with HTTPS and the security headers from `vercel.json` already active.
+
+**D. Every time you change something later**
+
+1. Edit files in the folder as usual (or run the photo script).
+2. Open GitHub Desktop. It lists what changed. Type a short note in the "Summary" box at the bottom left (for example "new pedicure photo") and click **Commit to main**.
+3. Click **Push origin** at the top. Vercel notices and republishes automatically; refresh the site after a minute.
+
+**E. When you have your own domain**
+
+1. In Vercel: your project → **Settings → Domains** → type the domain → **Add**. Vercel shows one or two DNS records to enter at the company you bought the domain from; copy them exactly. It usually goes live within an hour and HTTPS is automatic.
+2. In the folder: Find & Replace `https://REPLACE-WITH-YOUR-DOMAIN.example` → `https://your-domain.com` in `index.html`, `robots.txt` and `sitemap.xml`. Commit and push (step D).
+3. Optional but worth it: search.google.com/search-console → add your domain → submit `https://your-domain.com/sitemap.xml`.
