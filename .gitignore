@@ -1,0 +1,6 @@
+# Mac clutter
+.DS_Store
+# full-size photo backups (108 MB) — not part of the website
+images-originals/
+# local editor/preview settings
+.claude/
