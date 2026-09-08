@@ -125,19 +125,21 @@ The whole service menu was replaced with Katy's own pricing. It no longer matche
 | Category | Items | Notes |
 |---|---|---|
 | Manicures | 3 | $20 / $40 / $50, descriptions rewritten |
-| Pedicures | 8 | Basic $36 · Sugar $42 · Sugar and Mask $50 · Deluxe $60 · Billionaire Spa $70 · Bomb Spa $80 · Collagen Spa $90 · Herbal Bliss Spa $100. The two Volcano treatments and the old Ventana Herbal are gone |
-| Nail Enhancement | 15 | Renamed from "Nails". Gel X, Hybrid Gel, Acrylic, Builder, Pink & White / Ombre, Dip, Full Set Color Powder, then 8 à la carte items |
+| Pedicures | 11 | Basic $36 · Sugar $42 · Sugar and Mask $50 · Deluxe $60 · Billionaire Spa $70 · Volcano Spa Eruption $70 · Bomb Spa $80 · Collagen Spa $90 · Herbal Bliss Spa $100 · Volcano Luxury $100 · Ventana Herbal $120. Listed in price order |
+| Nail Enhancement | 19 | Renamed from "Nails". Seven full sets (Gel X, Hybrid Gel, Acrylic, Builder, Pink & White / Ombre, Dip, Full Set Color Powder) then twelve add-ons |
 | Waxing | 10 | New prices, and Brows Tinting added |
 | Eyelashes | 3 | **New category and new tab**: Strips $25, Individuals $120, Cluster $45 |
 | Drinks Menu | 32 | Unchanged |
+
+**Nothing was deleted.** On the owner's instruction the seven services the new list did not mention were restored with their original English and Spanish wording: Volcano Spa Eruption $70, Volcano Luxury Pedicure $100, Ventana Herbal Pedicure $120, Gel Manicure $40, Add Gel Color to Service $20, Paraffin $8, Extra Massage $1/min. Two price points are intentionally shared (Billionaire Spa and Volcano Spa Eruption at $70; Herbal Bliss Spa and Volcano Luxury at $100). Every other old service is present under its new name: Classic Pedicure became Basic Pedicure, Acrylic Full Set plus Acrylic Fill In became one Acrylic row with a fill-in line, Full Set Liqui / Fill In Liqui became Builder at the same $60 / $50, Color Powder Full Set plus its two refills became Full Set Color Powder with a fill-in line, and the waxing entries were renamed and repriced. 42 old services became 46.
 
 Supporting changes:
 
 - **Two-price services.** Items with a fill-in price use a new optional `sub` field, printed as a small grey line under the main price ("Fill in $47"). Translated separately in Spanish ("Relleno $47").
 - **Category photo is now optional.** A category with no entry in `SERVICE_IMG` hides the photo frame instead of breaking. Eyelashes has no photo yet; adding `eyelash: { src: 'images/service-eyelash.jpg', w: …, h: … }` to `SERVICE_IMG` turns it on.
 - **Salon Policy section** added between Location and the footer, linked from the top menu, the phone menu and the footer. Its 9 lines are stored as translations (`policy.1`…`policy.9`) and rendered by `renderPolicy()`, so they switch language with everything else. The count is controlled by `POLICY_COUNT`.
-- The source text said "Apollo Nails & Spa Policy". That is a different business name, so the heading reads "Salon Policy" and the site name stays Ventana throughout.
-- The source was written for a kiosk app ("add as a screen accessible from the main menu"); on the website that became a page section reachable from the navigation.
+- The source text was headed "Apollo Nails & Spa Policy". The owner confirmed to ignore the name, so the heading reads "Salon Policy" and the site name stays Ventana throughout.
+- The source was written for a kiosk app; the owner confirmed to ignore that, so on the website it became a page section reachable from the navigation.
 - Translation dictionary grew from 126 to 142 keys per language, still at full parity.
 
 Verified in headless Chrome at 1440 and 375: no console errors, no failed requests, all six tabs render the right rows and prices, fill-in sub-prices show in both languages, expanding a row works, the Eyelashes tab hides the photo and the other tabs bring it back, the policy list renders 9 numbered items in both languages, the wider navigation still fits, and there is no sideways overflow on a phone.
