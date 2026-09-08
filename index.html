@@ -279,6 +279,7 @@ h1, h2, h3, h4 { font-family: var(--font-h); font-weight: 400; line-height: 1.12
 .tab-btn:hover { background: var(--sand); }
 .tab-btn.active, .tab-btn[aria-selected="true"] { background: var(--ink); color: var(--gold-lt); }
 .tab-btn.active::after, .tab-btn[aria-selected="true"]::after { opacity: 1; transform: none; }
+.menu-photo[hidden] { display: none; }
 .menu-photo { margin: 0; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; box-shadow: var(--shadow-md); background: var(--sand); }
 .menu-photo img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
 
@@ -291,7 +292,8 @@ h1, h2, h3, h4 { font-family: var(--font-h); font-weight: 400; line-height: 1.12
 .menu-name svg { width: 14px; height: 14px; color: var(--gold-deep); transition: transform 0.3s ease; flex-shrink: 0; }
 .menu-short { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
 .menu-hint { font-size: 11.5px; font-weight: 700; letter-spacing: 0.4px; color: var(--gold-text); }
-.menu-price { font-family: var(--font-h); font-size: 22px; color: var(--ink); white-space: nowrap; }
+.menu-price { font-family: var(--font-h); font-size: 22px; color: var(--ink); white-space: nowrap; text-align: right; }
+.menu-price small { display: block; font-family: var(--font-b); font-size: 11px; font-weight: 600; color: var(--muted); margin-top: 3px; }
 .menu-book {
   display: inline-flex; align-items: center; padding: 9px 16px; border-radius: 999px;
   border: 1.5px solid var(--sand-dk); font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
@@ -442,6 +444,23 @@ footer { background: var(--sand); padding-top: 72px; }
 .footer-bottom .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
 /* ============================
+   SALON POLICY
+   ============================ */
+#policy { padding: 100px 0; background: var(--sand); }
+.policy-card { background: var(--cream); border: 1px solid var(--sand-dk); border-radius: 26px; padding: 40px 44px; }
+.policy-list { list-style: none; columns: 2; column-gap: 48px; }
+.policy-item { display: flex; gap: 14px; font-size: 14.5px; line-height: 1.7; color: var(--ink-2); break-inside: avoid; margin-bottom: 20px; }
+.policy-item:last-child { margin-bottom: 0; }
+.policy-num { font-family: var(--font-h); font-size: 15px; color: var(--gold-deep); flex-shrink: 0; padding-top: 2px; }
+.policy-thanks { margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--sand-dk); font-family: var(--font-h); font-size: 21px; }
+@media (max-width: 768px) {
+  #policy { padding: 72px 0; }
+  .policy-card { padding: 26px 22px; border-radius: 20px; }
+  .policy-list { columns: 1; }
+  .policy-thanks { font-size: 18px; }
+}
+
+/* ============================
    MOBILE STICKY BAR (Call + Book Now)
    ============================ */
 .mobile-bar {
@@ -582,6 +601,7 @@ footer { background: var(--sand); padding-top: 72px; }
       <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
       <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
       <a href="#location" data-i18n="nav.location">Location</a>
+      <a href="#policy" data-i18n="nav.policy">Policy</a>
     </nav>
     <div class="nav-right">
       <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="nav.langAria">
@@ -604,6 +624,7 @@ footer { background: var(--sand); padding-top: 72px; }
   <a href="#reviews" class="mobile-nav-link" data-i18n="nav.reviews">Reviews</a>
   <a href="#gallery" class="mobile-nav-link" data-i18n="nav.gallery">Gallery</a>
   <a href="#location" class="mobile-nav-link" data-i18n="nav.location">Location</a>
+  <a href="#policy" class="mobile-nav-link" data-i18n="nav.policy">Policy</a>
   <a data-href="BOOKING" href="#" target="_blank" rel="noopener" class="btn btn-gold mobile-book" data-i18n="nav.book">Book Now</a>
 </div>
 
@@ -678,6 +699,7 @@ footer { background: var(--sand); padding-top: 72px; }
           <button class="tab-btn" role="tab" id="tab-pedicures" aria-selected="false" aria-controls="services-layout-wrap" tabindex="-1" data-tab="pedicures" data-i18n="tabs.pedicures">Pedicures</button>
           <button class="tab-btn" role="tab" id="tab-nails" aria-selected="false" aria-controls="services-layout-wrap" tabindex="-1" data-tab="nails" data-i18n="tabs.nails">Nails</button>
           <button class="tab-btn" role="tab" id="tab-waxing" aria-selected="false" aria-controls="services-layout-wrap" tabindex="-1" data-tab="waxing" data-i18n="tabs.waxing">Waxing</button>
+          <button class="tab-btn" role="tab" id="tab-eyelash" aria-selected="false" aria-controls="services-layout-wrap" tabindex="-1" data-tab="eyelash" data-i18n="tabs.eyelash">Eyelashes</button>
           <button class="tab-btn" role="tab" id="tab-drinks" aria-selected="false" aria-controls="services-layout-wrap" tabindex="-1" data-tab="drinks" data-i18n="tabs.drinks">Drinks Menu</button>
         </div>
         <figure class="menu-photo">
@@ -863,6 +885,23 @@ footer { background: var(--sand); padding-top: 72px; }
   </div>
 </section>
 
+<!-- ===== SALON POLICY ===== -->
+<section id="policy">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <div>
+        <span class="eyebrow" data-i18n="policy.tag">Good To Know</span>
+        <h2><span data-i18n="policy.title1">Salon</span> <span data-i18n="policy.title2">Policy</span></h2>
+      </div>
+      <p class="lead" data-i18n="policy.lead">To ensure a pleasant and efficient experience for all clients, our salon has established the following policies. We appreciate your understanding and cooperation.</p>
+    </div>
+    <div class="policy-card fade-up stagger-1">
+      <ol class="policy-list" id="policyList"></ol>
+      <p class="policy-thanks" data-i18n="policy.thanks">Thank you for visiting us. We hope you enjoy your visit.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="container">
@@ -888,6 +927,7 @@ footer { background: var(--sand); padding-top: 72px; }
           <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
           <li><a href="#features" data-i18n="footer.whyus">Why Us</a></li>
           <li><a href="#location" data-i18n="nav.location">Location</a></li>
+          <li><a href="#policy" data-i18n="nav.policy">Policy</a></li>
         </ul>
       </div>
       <div class="footer-col fade-up stagger-2">
@@ -1057,6 +1097,19 @@ footer { background: var(--sand); padding-top: 72px; }
       'gallery.lead': 'A few recent sets from our chairs. Tap any photo to enlarge it.',
       'features.lead': 'Small details, done properly, every single visit.',
       'location.lead': 'Find us on Clay Road in Galicia Retail Plaza.', 'location.hours': 'Hours',
+      'nav.policy': 'Policy',
+      'policy.tag': 'Good To Know', 'policy.title1': 'Salon', 'policy.title2': 'Policy',
+      'policy.lead': 'To ensure a pleasant and efficient experience for all clients, our salon has established the following policies. We appreciate your understanding and cooperation.',
+      'policy.1': 'We reserve the right to refuse service to anyone.',
+      'policy.2': 'There are no refunds. We will try our best to resolve the issue.',
+      'policy.3': 'Our prices are available and transparent on the menu.',
+      'policy.4': 'Please give us advance notice for canceling any appointment, at least 3 hours. After 3 cancellations without notice, you will not be able to book an appointment in advance.',
+      'policy.5': 'Health issues or diabetes must be communicated before service.',
+      'policy.6': 'Please notify us immediately, or within 24 hours, if there is any issue relating to your service.',
+      'policy.7': 'There is no guarantee on regular polish or fill-in and refill services.',
+      'policy.8': 'Our license does not permit us to perform ingrown nail removal procedures. However, we will do our best to help manage the ingrown nail and provide appropriate care.',
+      'policy.9': 'To be assured that we will address the situation promptly and efficiently, please inform the salon manager of any issues.',
+      'policy.thanks': 'Thank you for visiting us. We hope you enjoy your visit.',
       'day.0': 'Sunday', 'day.1': 'Monday', 'day.2': 'Tuesday', 'day.3': 'Wednesday', 'day.4': 'Thursday', 'day.5': 'Friday', 'day.6': 'Saturday',
       'dayShort.0': 'Sun', 'dayShort.1': 'Mon', 'dayShort.2': 'Tue', 'dayShort.3': 'Wed', 'dayShort.4': 'Thu', 'dayShort.5': 'Fri', 'dayShort.6': 'Sat',
       'nav.home': 'Back to top', 'nav.menu': 'Open menu', 'nav.services': 'Services', 'nav.reviews': 'Reviews', 'nav.gallery': 'Gallery', 'nav.location': 'Location', 'nav.book': 'Book Now',
@@ -1065,7 +1118,7 @@ footer { background: var(--sand); padding-top: 72px; }
       'hero.book': 'Book Your Visit', 'hero.explore': 'Explore Services', 'intro.tag': 'Welcome to Ventana',
       'intro.text': 'Where beauty meets relaxation. Our talented team delivers exceptional nail care in a warm, inviting atmosphere. From classic manicures to luxurious spa pedicures, every visit is designed to leave you feeling pampered, refreshed, and beautiful.',
       'services.tag': 'What We Offer', 'services.title1': 'Our', 'services.title2': 'Services',
-      'tabs.aria': 'Service categories', 'tabs.manicures': 'Manicures', 'tabs.pedicures': 'Pedicures', 'tabs.nails': 'Nails', 'tabs.waxing': 'Waxing', 'tabs.drinks': 'Drinks Menu',
+      'tabs.aria': 'Service categories', 'tabs.manicures': 'Manicures', 'tabs.pedicures': 'Pedicures', 'tabs.nails': 'Nail Enhancement', 'tabs.eyelash': 'Eyelashes', 'tabs.waxing': 'Waxing', 'tabs.drinks': 'Drinks Menu',
       'svc.book': 'Book', 'svc.see': 'See Details ▼', 'svc.hide': 'Hide Details ▲',
       'svc.alt.manicures': "Nail technician carefully applying polish to a client's fingernail",
       'svc.alt.pedicures': 'Freshly pedicured feet with a pink orchid on a wooden floor',
@@ -1119,6 +1172,19 @@ footer { background: var(--sand); padding-top: 72px; }
       'gallery.lead': 'Algunos trabajos recientes de nuestro salón. Toca cualquier foto para ampliarla.',
       'features.lead': 'Pequeños detalles, bien hechos, en cada visita.',
       'location.lead': 'Encuéntranos en Clay Road, en Galicia Retail Plaza.', 'location.hours': 'Horario',
+      'nav.policy': 'Políticas',
+      'policy.tag': 'Información Importante', 'policy.title1': 'Políticas del', 'policy.title2': 'Salón',
+      'policy.lead': 'Para garantizar una experiencia agradable y eficiente a todos nuestros clientes, el salón ha establecido las siguientes políticas. Agradecemos tu comprensión y cooperación.',
+      'policy.1': 'Nos reservamos el derecho de admisión.',
+      'policy.2': 'No hay reembolsos. Haremos todo lo posible por resolver cualquier problema.',
+      'policy.3': 'Nuestros precios están disponibles y son transparentes en el menú.',
+      'policy.4': 'Avísanos con anticipación para cancelar cualquier cita, al menos 3 horas antes. Después de 3 cancelaciones sin aviso, no podrás reservar cita por adelantado.',
+      'policy.5': 'Cualquier problema de salud o diabetes debe informarse antes del servicio.',
+      'policy.6': 'Avísanos de inmediato, o dentro de las 24 horas, si hay algún problema relacionado con tu servicio.',
+      'policy.7': 'No hay garantía sobre el esmalte regular ni sobre los servicios de relleno.',
+      'policy.8': 'Nuestra licencia no nos permite realizar procedimientos de extracción de uñas encarnadas. Sin embargo, haremos todo lo posible por ayudarte a manejarla y brindarte el cuidado adecuado.',
+      'policy.9': 'Para asegurarnos de atender la situación de forma rápida y eficiente, por favor informa a la gerente del salón sobre cualquier inconveniente.',
+      'policy.thanks': 'Gracias por visitarnos. Esperamos que disfrutes tu visita.',
       'day.0': 'Domingo', 'day.1': 'Lunes', 'day.2': 'Martes', 'day.3': 'Miércoles', 'day.4': 'Jueves', 'day.5': 'Viernes', 'day.6': 'Sábado',
       'dayShort.0': 'Dom', 'dayShort.1': 'Lun', 'dayShort.2': 'Mar', 'dayShort.3': 'Mié', 'dayShort.4': 'Jue', 'dayShort.5': 'Vie', 'dayShort.6': 'Sáb',
       'nav.home': 'Volver al inicio', 'nav.menu': 'Abrir menú', 'nav.services': 'Servicios', 'nav.reviews': 'Reseñas', 'nav.gallery': 'Galería', 'nav.location': 'Ubicación', 'nav.book': 'Reservar',
@@ -1127,7 +1193,7 @@ footer { background: var(--sand); padding-top: 72px; }
       'hero.book': 'Reserva Tu Visita', 'hero.explore': 'Ver Servicios', 'intro.tag': 'Bienvenidos a Ventana',
       'intro.text': 'Donde la belleza se encuentra con la relajación. Nuestro talentoso equipo brinda un cuidado de uñas excepcional en un ambiente cálido y acogedor. Desde manicuras clásicas hasta lujosas pedicuras spa, cada visita está pensada para que salgas consentida, renovada y hermosa.',
       'services.tag': 'Lo Que Ofrecemos', 'services.title1': 'Nuestros', 'services.title2': 'Servicios',
-      'tabs.aria': 'Categorías de servicios', 'tabs.manicures': 'Manicuras', 'tabs.pedicures': 'Pedicuras', 'tabs.nails': 'Uñas', 'tabs.waxing': 'Depilación', 'tabs.drinks': 'Menú de Bebidas',
+      'tabs.aria': 'Categorías de servicios', 'tabs.manicures': 'Manicuras', 'tabs.pedicures': 'Pedicuras', 'tabs.nails': 'Uñas y Extensiones', 'tabs.eyelash': 'Pestañas', 'tabs.waxing': 'Depilación', 'tabs.drinks': 'Menú de Bebidas',
       'svc.book': 'Reservar', 'svc.see': 'Ver Detalles ▼', 'svc.hide': 'Ocultar Detalles ▲',
       'svc.alt.manicures': 'Técnica de uñas aplicando esmalte con cuidado en la uña de una clienta',
       'svc.alt.pedicures': 'Pies con pedicura recién hecha junto a una orquídea rosa sobre piso de madera',
@@ -1174,74 +1240,129 @@ footer { background: var(--sand); padding-top: 72px; }
         manicures: [
           { name: 'Manicura Básica',
             desc: 'Corte de uñas, limpieza de cutícula, loción, toalla caliente y esmalte regular. Gel +$20.',
-            full: 'Corte de uñas, limpieza de cutícula, loción, toalla caliente y esmalte regular. *Mejora tus uñas con esmalte en gel (shellac) por $20.' },
+            full: 'Una manicura sencilla y agradable. Incluye corte de uñas, limpieza de cutícula, loción, toalla caliente y esmalte regular. Mejora a esmalte en gel (shellac) por +$20.' },
           { name: 'Manicura Signature',
-            desc: 'Cuidado de cutícula, masaje con loción, parafina, masaje de cuello de 7 min, toalla tibia y masaje con cera de vela. Gel +$20.',
-            full: 'Corte de uñas, cuidado de cutícula, masaje con loción, parafina y esmalte regular. Incluye un masaje de cuello de 7 minutos, toalla tibia y un relajante masaje con cera de vela tibia para aliviar la tensión y promover la relajación. *Mejora tus uñas con esmalte en gel (shellac) por $20.' },
+            desc: 'Masaje de 7 min. Cuidado de cutícula, masaje con loción, parafina, masaje de cuello, toalla tibia y masaje con cera de vela. Gel +$20.',
+            full: 'Masaje de 7 minutos. Hidrata y revitaliza tus manos con corte de uñas, cuidado de cutícula, masaje con loción, parafina y esmalte regular. Incluye un masaje de cuello de 7 minutos, toalla tibia y un relajante masaje con cera de vela tibia para aliviar la tensión y promover la relajación. Mejora a esmalte en gel (shellac) por +$20.' },
           { name: 'Manicura Deluxe',
-            desc: 'Versión mejorada de la Signature con exfoliación, vapor para brazos, masaje de 10 min con cera de vela y parafina. Gel +$20.',
-            full: 'Versión mejorada de la Manicura Signature. Incluye corte de uñas, cuidado de cutícula, exfoliación, loción hidratante, parafina, envoltura con toalla caliente y esmalte regular a tu elección. Un vaporizador para brazos abre los poros para una mejor hidratación, seguido de un profundo y relajante masaje de 10 minutos con cera de vela tibia, que brinda calor suave y aromaterapia para aliviar la tensión y dejar tu piel suave y revitalizada. *Mejora tus uñas con esmalte en gel (shellac) por $20.' }
+            desc: 'Masaje de 10 min. Versión mejorada de la Signature con exfoliación, loción hidratante, parafina y envoltura con toalla caliente. Gel +$20.',
+            full: 'Masaje de 10 minutos. Una versión mejorada de la Manicura Signature: corte de uñas, cuidado de cutícula, exfoliación, loción hidratante, parafina, envoltura con toalla caliente y esmalte regular a tu elección. Seguido de un masaje de 10 minutos con cera de vela tibia que brinda calor suave y aromaterapia. Mejora a esmalte en gel (shellac) por +$20.' }
         ],
         pedicures: [
-          { name: 'Pedicura Clásica',
-            desc: 'Masaje de 6 min, exfoliación con sal, loción y toalla caliente. Todas las pedicuras incluyen remojo, corte y cuidado de cutícula. Gel +$20.',
-            full: 'Masaje de 6 minutos. Masaje exfoliante con sal, corte de uñas, limpieza de cutícula, loción y toalla caliente. Todas las pedicuras incluyen remojo, corte, cuidado de cutícula y esmalte regular. Mejora a esmalte en gel por +$20.' },
+          { name: 'Pedicura Básica',
+            desc: 'Masaje de 5 min. Corte, forma y pulido, cuidado de cutícula, removedor de callos, exfoliación ligera, masaje de piernas y pies, toalla caliente. Gel +$20.',
+            full: 'Masaje de 5 minutos. Corte, forma y pulido de las uñas de los pies. Retiro del exceso de cutícula. Solución removedora de callos para suavizar callos y aliviar talones agrietados. Exfoliación ligera. Masaje de piernas y pies. Envoltura con toalla caliente. Mejora a esmalte en gel (shellac) por +$20.' },
           { name: 'Pedicura de Azúcar',
-            desc: 'Masaje de 8 min, exfoliante de azúcar, masaje con piedras calientes o loción. Aromas: Lavanda, Tropical. Gel +$20.',
-            full: 'Masaje de 8 minutos. Exfoliación con azúcar, masaje con piedras calientes o loción y envoltura con toalla caliente. Aromas: Lavanda, Tropical. Todas las pedicuras incluyen remojo, corte, cuidado de cutícula y esmalte regular. Mejora a esmalte en gel por +$20.' },
-          { name: 'Pedicura de Azúcar y Mascarilla',
-            desc: 'Masaje de 14 min, exfoliación con azúcar, mascarilla, dos toallas calientes, piedras calientes o parafina. Aromas: Naranja, Cucumber Dream. Gel +$20.',
-            full: 'Masaje de 14 minutos. Masaje exfoliante con azúcar, mascarilla para suavizar la piel, dos toallas calientes y masaje con piedras calientes o parafina. Aromas: Naranja, Cucumber Dream. Todas las pedicuras incluyen remojo, corte, cuidado de cutícula y esmalte regular. Mejora a esmalte en gel por +$20.' },
+            desc: 'Masaje de 8 min. Exfoliación con azúcar, masaje con piedras calientes y loción, toalla caliente. Aromas: Lavanda, Tropical, Mango, Sugar #5. Gel +$20.',
+            full: 'Masaje de 8 minutos. Exfoliación con azúcar, masaje con piedras calientes y loción, y envoltura con toalla caliente. Aromas de azúcar: Lavanda, Tropical, Mango, Sugar #5. Mejora a esmalte en gel (shellac) por +$20.' },
+          { name: 'Azúcar y Mascarilla',
+            desc: 'Masaje de 12 min. Exfoliante de azúcar, mascarilla suavizante, toallas tibias, masaje con loción, piedras calientes o parafina. Aromas: Naranja, Cucumber Dream, Limón, White Pearl. Gel +$20.',
+            full: 'Masaje de 12 minutos. Masaje exfoliante con azúcar, mascarilla suavizante, toallas tibias, masaje con loción hidratante y, a tu elección, masaje con piedras calientes o envoltura de parafina. Aromas: Naranja, Cucumber Dream, Limón, White Pearl. Mejora a esmalte en gel (shellac) por +$20.' },
           { name: 'Pedicura Deluxe',
-            desc: 'Masaje de 18 min, exfoliación con azúcar, mascarilla, masaje con piedras calientes y parafina. Aromas: Rosa, Leche y Miel. Gel +$20.',
-            full: 'Masaje de 18 minutos. Masaje exfoliante con azúcar, mascarilla, dos toallas calientes, masaje con loción, masaje intensivo con piedras calientes y parafina. Aromas: Rosa, Leche y Miel. Todas las pedicuras incluyen remojo, corte, cuidado de cutícula y esmalte regular. Mejora a esmalte en gel por +$20.' },
-          { name: 'Volcano Spa Eruption',
-            desc: 'Masaje de 25 min, desintoxicación de 8 pasos con el remojo burbujeante Volcano Eruption. Aromas: Madreselva, Cítrico Tropical. Gel +$20.',
-            full: 'Masaje de 25 minutos. Un lujoso tratamiento de 8 pasos diseñado para desintoxicar, exfoliar e hidratar profundamente tus pies. Incluye el remojo burbujeante "Volcano Eruption", que revitaliza la piel cansada y disuelve el estrés, dejando los pies suaves, tersos y completamente renovados. 8 pasos: Cristales Detox Volcano, Activador Detox Volcano, Exfoliante de Azúcar, Vapor, Mascarilla Orgánica de Colágeno, Loción de Masaje Orgánica de Colágeno, Masaje con Vela y Piedras Calientes, Parafina Caliente. Aromas: Madreselva, Cítrico Tropical. Mejora a esmalte en gel por +$20.' },
+            desc: 'Masaje de 14 min. Doble exfoliación de azúcar, mascarilla, vapor, masaje con piedras calientes y cera de vela, masaje con loción, parafina. Gel +$20.',
+            full: 'Masaje de 14 minutos. Doble masaje exfoliante con azúcar, mascarilla suavizante, vapor, toallas tibias, masaje con piedras calientes y cera de vela, masaje con loción hidratante y envoltura de parafina. Aromas: Rosa, Naranja, Té Verde, Leche y Miel, Pepino, Lemongrass. Mejora a esmalte en gel (shellac) por +$20.' },
+          { name: 'Billionaire Spa',
+            desc: 'Masaje de 18 min. Remojo de sales burbujeantes, exfoliante de azúcar, mascarilla en crema, loción, vapor, masaje con piedras calientes y cera de vela. Gel +$20.',
+            full: 'Masaje de 18 minutos. Remojo de sales burbujeantes, exfoliante de azúcar, mascarilla en crema, loción de masaje, vapor y masaje con piedras calientes y cera de vela. Aromas: Lavanda, Café, Té Verde y Aloe Vera, Jazmín, Golden Rose. Mejora a esmalte en gel (shellac) por +$20.' },
+          { name: 'Bomb Spa',
+            desc: 'Masaje de 22 min. Tratamiento de 7 pasos con pedi bomb, exfoliante O2, mascarilla y crema de colágeno, vapor, piedras calientes. Gel +$20.',
+            full: 'Masaje de 22 minutos. Tratamiento de 7 pasos: pedi bomb, flores disolubles, kit de pedicura desechable, removedor de callos, exfoliante de burbujas O2, mascarilla de colágeno y crema de masaje de colágeno. Además vapor y masaje con piedras calientes y cera de vela. Aromas: Flor de Cerezo Japonés, Cítricos de Hawái, Mother of Pearl, Melón y Mango, 24K Crazy Rich, Red Carpet. Mejora a esmalte en gel (shellac) por +$20.' },
           { name: 'Pedicura Spa de Colágeno',
-            desc: 'Masaje de 30 min, tratamiento de 9 pasos con colágeno para una hidratación profunda. Aromas: Crystal Waters, Menta. Gel +$20.',
-            full: 'Masaje de 30 minutos. Un lujoso tratamiento de 9 pasos con colágeno de origen vegetal, aceites esenciales y extractos naturales para desintoxicar, exfoliar, hidratar profundamente y rejuvenecer los pies cansados. Perfecto para una relajación total, nutrición profunda y resultados sedosos y duraderos. 9 pasos: Bomba de Baño, Cristales de Colágeno, Exfoliante de Caña de Azúcar con Colágeno, Vapor, Mascarilla en Crema de Colágeno, Gel Relajante Muscular de Colágeno, Loción de Masaje de Colágeno, Masaje con Vela y Piedras Calientes, Parafina Caliente. Aromas: Crystal Waters, Menta. Mejora a esmalte en gel por +$20.' },
-          { name: 'Pedicura Volcano de Lujo',
-            desc: 'Masaje de 40 min, tratamiento premium de 10 pasos con CBD. Aromas: Rose Gold, Fuji Pearl. Gel +$20.',
-            full: 'Masaje de 40 minutos. Una sofisticada versión de 10 pasos con ingredientes premium infusionados con CBD y un espectacular remojo burbujeante "Volcano Eruption" que desintoxica, suaviza y refresca la piel mientras llena la sala de una fragancia relajante. Ideal para relajación total, rejuvenecimiento y los beneficios calmantes del cuidado con CBD. 10 pasos: Bomba de Baño, Cristales Detox Volcano con CBD, Activador Detox Volcano con CBD, Exfoliante de Azúcar con CBD, Vapor, Mascarilla en Crema de Colágeno con CBD, Loción de Masaje de Colágeno con CBD, Masaje con Vela y Piedras Calientes, Parafina Caliente. Aromas: Rose Gold, Fuji Pearl. Mejora a esmalte en gel por +$20.' },
-          { name: 'Pedicura Herbal Ventana',
-            desc: 'Masaje de 50 min, escape botánico de 9 pasos con minerales del Mar Muerto. Aromas: Eucalipto, Lavanda, Lemongrass, Rosa, Árbol de Té. Gel +$20.',
-            full: 'Masaje de 50 minutos. Un refrescante escape botánico rico en hierbas e ingredientes naturales para rejuvenecer cuerpo, mente y espíritu. Consiente tus pies con sales, geles, lociones y mascarillas herbales, combinados con toallas tibias, masaje con piedras calientes y parafina para máxima hidratación y relajación. Recomendada para pies cansados, secos o sensibles. 9 pasos: Bomba de Baño, Remojo de Sal Mineral del Mar Muerto, Vapor, Aplicación de Gel Herbal, Masaje con Aceite Herbal, Masaje con Loción Herbal, Mascarilla Herbal, Masaje con Vela y Piedras Calientes, Parafina Caliente. Aromas: Eucalipto, Lavanda, Lemongrass, Rosa, Árbol de Té. Mejora a esmalte en gel por +$20.' }
+            desc: 'Masaje de 28 min. Tratamiento de 9 pasos con CBD y colágeno vegetal, vapor, masaje con piedras calientes y parafina. Gel +$20.',
+            full: 'Masaje de 28 minutos. Tratamiento de 9 pasos con CBD e infusión de colágeno de origen vegetal: bomba de baño, remojo con cristales de colágeno, exfoliante de caña de azúcar con colágeno, vapor, mascarilla en crema de colágeno, gel relajante muscular de colágeno, loción de masaje de colágeno, masaje con vela y piedras calientes, y parafina caliente. Aromas: Rose Gold, Crystal Waters, Fuji Pearl, Menta. Mejora a esmalte en gel (shellac) por +$20.' },
+          { name: 'Herbal Bliss Spa',
+            desc: 'Masaje de 35 min. Desintoxicación de pies y alivio muscular. Tratamiento herbal de 5 pasos con sal rosa del Himalaya, mascarilla de arcilla y aceite de aromaterapia. Gel +$20.',
+            full: 'Masaje de 35 minutos. Dedicado a tu bienestar: desintoxicación de pies y alivio muscular. Tratamiento de 5 pasos con remojo de sal rosa del Himalaya con hierbas, exfoliante suavizante del Himalaya, mascarilla de arcilla, aceite de aromaterapia y vela de aceite para masaje. Además vapor y masaje con piedras calientes y cera de vela. Ingredientes: manteca de karité, aceite de coco, cera de soya natural, aceite de oliva, aceite de aguacate, hierbas, sal rosa del Himalaya, aceite esencial, glicerina y fragancia premium, sin colorantes. Mejora a esmalte en gel (shellac) por +$20.' }
         ],
         nails: [
-          { name: 'Set Completo de Acrílico', desc: 'Uñas acrílicas hermosas y duraderas, con la forma que prefieras.', full: 'Uñas acrílicas profesionales para un set completo resistente y de larga duración.' },
-          { name: 'Relleno de Acrílico', desc: 'Mantén y renueva tu set de acrílico actual.', full: 'Relleno de mantenimiento para uñas acrílicas existentes.' },
-          { name: 'Set Completo Liqui', desc: 'Set completo de acrílico líquido con un acabado suave y natural.', full: 'Set completo con gel líquido para un acabado suave y de aspecto natural.' },
-          { name: 'Set Completo de Polvo de Color', desc: 'Polvo de color vibrante aplicado como set completo.', full: 'Set completo con polvo acrílico de color para un color vibrante y resistente a las astillas.' },
-          { name: 'Pink & White / Ombré', desc: 'Francesa clásica o degradado ombré: elegancia atemporal.', full: 'Diseño francés clásico o degradado ombré de moda.' },
-          { name: 'Relleno Liqui', desc: 'Relleno de acrílico líquido para mantener tu set actual.', full: 'Relleno de mantenimiento para uñas de gel líquido existentes.' },
-          { name: 'Relleno de Polvo de Color (mismo color)', desc: 'Relleno de polvo de color, con el mismo color de tu set actual.', full: 'Relleno con el mismo polvo de color de tu set anterior.' },
-          { name: 'Relleno de Polvo de Color (cambio de color)', desc: 'Relleno de polvo de color, cambiando a un color nuevo.', full: 'Relleno con un polvo de color nuevo a tu elección.' },
-          { name: 'Dip + Cutícula y Masaje', desc: 'Polvo dip de larga duración con arreglo de cutícula y relajante masaje de manos.', full: 'Aplicación de polvo dip con arreglo de cutícula y un relajante masaje de manos.' },
-          { name: 'Gel Híbrido', desc: 'Combina la resistencia del acrílico con la flexibilidad del gel. Sin olor, sin monómero y sin astillas; dura de 2 a 4 semanas.', full: 'Lo mejor de dos mundos. Combina la fuerza y durabilidad del acrílico con la ligereza y flexibilidad del esmalte en gel. Se aplica en capas y se cura con lámpara LED/UV. Acabado sin olor, sin monómero y sin astillas que dura de 2 a 4 semanas. Más fuerte que el gel tradicional, más ligero que el acrílico y menos dañino para la uña natural.' },
-          { name: 'Manicura en Gel', desc: 'Esmalte en gel resistente a las astillas con un brillo duradero.', full: 'Aplicación de esmalte en gel para un acabado brillante y sin astillas que dura más de 2 semanas.' },
-          { name: 'Solo Color en Gel', desc: 'Aplicación de color en gel sobre uñas existentes, sin dar forma.', full: 'Solo aplicación de color en gel; no incluye servicio de manicura.' },
-          { name: 'Cambio de Color en Pies o Manos', desc: 'Cambio rápido de color en uñas de pies o manos.', full: 'Cambio rápido de esmalte en uñas de pies o manos.' },
-          { name: 'Solo Retiro de Uñas', desc: 'Retiro seguro y suave de acrílico, gel o dip.', full: 'Retiro seguro de uñas de acrílico, gel o polvo dip.' },
-          { name: 'Retiro de Uñas con Servicio', desc: 'Retiro combinado con un servicio nuevo.', full: 'Retiro de uñas incluido al reservar otro servicio de uñas.' },
-          { name: 'Parafina', desc: 'Tratamiento de parafina tibia para manos o pies ultra suaves.', full: 'Tratamiento de parafina tibia para hidratación profunda y piel suave.' },
-          { name: 'Diseño', desc: 'Arte en uñas y diseños personalizados; pregunta a tu técnica por las opciones.', full: 'Arte en uñas y diseños personalizados. El precio varía según la complejidad.' },
-          { name: 'Forma', desc: 'Forma personalizada: cuadrada, almendra, coffin, stiletto y más.', full: 'Servicio de moldeado de uñas al estilo que prefieras.' },
-          { name: 'Punta Francesa o de Color', desc: 'Puntas francesas clásicas o puntas de color personalizadas.', full: 'Punta francesa clásica o acento de punta en color.' },
-          { name: 'Largo', desc: 'Largo adicional agregado a cualquier servicio de uñas.', full: 'Cargo extra por largo adicional de uñas. El precio varía.' },
-          { name: 'Agregar Color en Gel al Servicio', desc: 'Mejora cualquier servicio con color en gel de larga duración.', full: 'Mejora cualquier servicio con esmalte en gel para un acabado duradero.' },
-          { name: 'Masaje Extra', desc: 'Extiende tu relajación con tiempo adicional de masaje.', full: 'Tiempo adicional de masaje a $1 por minuto.' }
+          { name: 'Gel X',
+            desc: 'Extensiones de gel suave prediseñadas para un set completo ligero y de aspecto natural.',
+            full: 'Set completo de Gel X. Extensiones de gel suave prediseñadas adheridas a la uña natural para un acabado ligero y natural, delicado con la uña.' },
+          { name: 'Gel Híbrido', sub: 'Relleno $55',
+            desc: 'La resistencia del acrílico con la flexibilidad del gel. Sin olor, sin monómero y sin astillas de 2 a 4 semanas.',
+            full: 'Lo mejor de dos mundos. Combina la fuerza y durabilidad del acrílico con la ligereza y flexibilidad del esmalte en gel. Se aplica en capas y se cura con lámpara LED/UV. Acabado sin olor, sin monómero y sin astillas que dura de 2 a 4 semanas. Más fuerte que el gel tradicional, más ligero que el acrílico y menos dañino para la uña natural.' },
+          { name: 'Acrílico', sub: 'Relleno $47',
+            desc: 'Uñas acrílicas hermosas y duraderas, con la forma que prefieras.',
+            full: 'Uñas acrílicas profesionales para un set completo resistente y de larga duración. Relleno disponible por $47.' },
+          { name: 'Builder', sub: 'Relleno $50',
+            desc: 'Set completo de gel builder para un acabado suave y natural con mayor resistencia.',
+            full: 'Set completo de gel builder. Esculpido en capas para un acabado suave y natural que añade resistencia y largo. Relleno disponible por $50.' },
+          { name: 'Pink & White / Ombré', sub: 'Relleno $60',
+            desc: 'Francesa clásica o degradado ombré, elegancia atemporal.',
+            full: 'Diseño francés clásico o degradado ombré de moda. Relleno disponible por $60.' },
+          { name: 'Dip',
+            desc: 'Polvo dip de larga duración con arreglo de cutícula y un relajante masaje de manos.',
+            full: 'Aplicación de polvo dip con arreglo de cutícula y un relajante masaje de manos para un acabado fuerte y ligero.' },
+          { name: 'Set Completo de Polvo de Color', sub: 'Relleno $45 mismo color · $50 color nuevo',
+            desc: 'Polvo de color vibrante aplicado como set completo.',
+            full: 'Set completo con polvo acrílico de color para un color vibrante y resistente a las astillas. Relleno $45 con el mismo color, o $50 al cambiar a un color nuevo.' },
+          { name: 'Solo Color en Gel',
+            desc: 'Aplicación de color en gel sobre uñas existentes, sin dar forma.',
+            full: 'Solo aplicación de color en gel. No incluye servicio de manicura.' },
+          { name: 'Cambio de Color en Pies o Manos',
+            desc: 'Cambio rápido de color en uñas de pies o manos.',
+            full: 'Cambio rápido de esmalte en uñas de pies o manos.' },
+          { name: 'Solo Retiro de Uñas',
+            desc: 'Retiro seguro y suave de acrílico, gel o dip.',
+            full: 'Retiro seguro de uñas de acrílico, gel o polvo dip.' },
+          { name: 'Retiro de Uñas con Servicio',
+            desc: 'Retiro combinado con un servicio nuevo.',
+            full: 'Retiro de uñas a precio reducido al reservarlo junto con otro servicio de uñas.' },
+          { name: 'Forma · Corte y Rediseño',
+            desc: 'Forma personalizada: cuadrada, almendra, coffin, stiletto y más.',
+            full: 'Corte y rediseño de tus uñas al estilo que prefieras: cuadrada, almendra, coffin, stiletto y más.' },
+          { name: 'Largo',
+            desc: 'Largo adicional agregado a cualquier servicio de uñas.',
+            full: 'Cargo extra por largo adicional, desde $5. El precio varía según el largo que elijas.' },
+          { name: 'Diseño',
+            desc: 'Arte en uñas y diseños personalizados, pregunta a tu técnica por las opciones.',
+            full: 'Arte en uñas y diseños personalizados, desde $5. El precio varía según la complejidad.' },
+          { name: 'Francesa',
+            desc: 'Puntas francesas clásicas o punta de color personalizada.',
+            full: 'Punta francesa clásica o acento de punta en color, de $5 a $40 según el estilo y el largo de la uña.' }
         ],
         waxing: [
-          { name: 'Cejas', desc: 'Cejas perfectamente definidas con una depilación precisa y suave.', full: 'Diseño de cejas y depilación profesional.' },
-          { name: 'Mentón o Labio', desc: 'Depilación rápida y limpia para una piel suave y sin vello.', full: 'Depilación facial suave para el mentón o el labio superior.' },
-          { name: 'Brazo Completo', desc: 'Brazos suaves y sin vello, de la muñeca al hombro.', full: 'Depilación completa de ambos brazos, de la muñeca al hombro.' },
-          { name: 'Medio Brazo', desc: 'Depilación de la muñeca al codo para resultados rápidos.', full: 'Depilación de la parte inferior o superior del brazo.' },
-          { name: 'Pierna Completa', desc: 'Depilación completa de pierna, del tobillo al muslo.', full: 'Depilación completa de ambas piernas, del tobillo a la parte superior del muslo.' },
-          { name: 'Media Pierna', desc: 'Depilación del tobillo a la rodilla, perfecta para el mantenimiento de temporada.', full: 'Depilación de la parte inferior o superior de la pierna.' },
-          { name: 'Axilas', desc: 'Depilación suave de axilas para una suavidad duradera.', full: 'Depilación rápida y limpia de axilas.' },
-          { name: 'Espalda', desc: 'Depilación completa de espalda para una piel limpia y segura de sí misma.', full: 'Depilación completa de espalda para resultados limpios y suaves.' },
-          { name: 'Rostro Completo', desc: 'Depilación facial completa para una piel suave y sin vello.', full: 'Depilación facial completa que incluye frente, mejillas, mentón, labio superior y patillas.' }
+          { name: 'Cejas',
+            desc: 'Cejas perfectamente definidas con una depilación precisa y suave.',
+            full: 'Diseño de cejas y depilación profesional.' },
+          { name: 'Labio o Mentón',
+            desc: 'Depilación rápida y limpia para una piel suave y sin vello.',
+            full: 'Depilación facial suave para el labio superior o el mentón, desde $10.' },
+          { name: 'Rostro Completo',
+            desc: 'Depilación facial completa para una piel suave y sin vello.',
+            full: 'Depilación facial completa que incluye frente, mejillas, mentón, labio superior y patillas, desde $45.' },
+          { name: 'Brazos Completos',
+            desc: 'Brazos suaves y sin vello, de la muñeca al hombro.',
+            full: 'Depilación completa de ambos brazos, de la muñeca al hombro, desde $55.' },
+          { name: 'Medios Brazos',
+            desc: 'Depilación de la muñeca al codo para resultados rápidos.',
+            full: 'Depilación de la parte inferior o superior del brazo, desde $35.' },
+          { name: 'Axilas',
+            desc: 'Depilación suave de axilas para una suavidad duradera.',
+            full: 'Depilación rápida y limpia de axilas, desde $25.' },
+          { name: 'Piernas Completas',
+            desc: 'Depilación completa de piernas, del tobillo al muslo.',
+            full: 'Depilación completa de ambas piernas, del tobillo a la parte superior del muslo, desde $55.' },
+          { name: 'Medias Piernas',
+            desc: 'Depilación del tobillo a la rodilla, perfecta para el mantenimiento de temporada.',
+            full: 'Depilación de la parte inferior o superior de la pierna, desde $40.' },
+          { name: 'Espalda',
+            desc: 'Depilación completa de espalda para una piel limpia.',
+            full: 'Depilación completa de espalda para resultados limpios y suaves, desde $45.' },
+          { name: 'Tinte de Cejas',
+            desc: 'Tinte semipermanente que define y da profundidad a tus cejas.',
+            full: 'Tinte semipermanente para intensificar el color, rellenar zonas escasas y definir la forma de tus cejas, desde $45.' }
+        ],
+        eyelash: [
+          { name: 'Pestañas de Tira',
+            desc: 'Pestañas de tira completa para volumen inmediato, perfectas para un evento.',
+            full: 'Pestañas de tira completa aplicadas y ajustadas a la forma de tu ojo para dar volumen y largo al instante. Ideales para bodas, fotos y salidas nocturnas.' },
+          { name: 'Pestañas Individuales',
+            desc: 'Pestañas aplicadas una por una para un acabado natural y duradero.',
+            full: 'Pestañas aplicadas una a una sobre tus pestañas naturales para un set personalizado, de aspecto natural y de larga duración. Incluye diseño según la forma de tu ojo.' },
+          { name: 'Pestañas en Grupo',
+            desc: 'Pequeños grupos para pestañas más llenas en menos tiempo que las individuales.',
+            full: 'Pequeños grupos de pestañas colocados a lo largo de la línea de pestañas para una mirada más llena y voluminosa en menos tiempo que un set individual completo.' }
         ]
       }
     }
@@ -1258,149 +1379,140 @@ footer { background: var(--sand); padding-top: 72px; }
   /* ─── SERVICES DATA (copied verbatim from the Richmond site — prices and wording are identical) ─── */
   const data = {
     manicures: {
-      photo: 'Manicure',
       items: [
         { name: 'Basic Manicure', price: '$20',
-          desc: 'Nail trimming, cuticle cleaning, lotion, hot towel, and regular polish. +$20 gel upgrade.',
-          full: 'Nail trimming, cuticle cleaning, lotion, hot towel, and regular polish. *Upgrade your nails with gel polish (shellac) for $20.' },
+          desc: 'Nail trimming, cuticle cleaning, lotion, hot towel and regular polish. Gel +$20.',
+          full: 'A nice and simple manicure. Includes nail trimming, cuticle cleaning, lotion, hot towel, and regular polish. Upgrade to gel polish (shellac) for +$20.' },
         { name: 'Signature Manicure', price: '$40',
-          desc: 'Cuticle care, lotion massage, paraffin wax, 7-min neck massage, warm towel & tealight candle wax massage. +$20 gel upgrade.',
-          full: 'Nail trimming, cuticle care, lotion massage, paraffin wax, and regular polish. Includes a 7-minute neck massage, warm towel, and soothing tealight candle wax massage to ease tension and promote relaxation. *Upgrade your nails with gel polish (shellac) for $20.' },
+          desc: '7-min massage. Cuticle care, lotion massage, paraffin wax, neck massage, warm towel and tealight candle wax massage. Gel +$20.',
+          full: '7-minute massage. Moisturize and revitalize your hands with nail trimming, cuticle care, lotion massage, paraffin wax, and regular polish. Includes a 7-minute neck massage, warm towel, and soothing tealight candle wax massage to ease tension and promote relaxation. Upgrade to gel polish (shellac) for +$20.' },
         { name: 'Deluxe Manicure', price: '$50',
-          desc: 'Enhanced Signature with exfoliation, arm steamer & 10-min tealight candle wax massage, paraffin wax. +$20 gel upgrade.',
-          full: 'Enhanced version of the Signature Manicure. Includes nail trimming, cuticle care, exfoliation, hydrating lotion, paraffin wax, hot towel wrap, and your choice of regular polish. A soothing arm steamer opens the pores for better hydration, followed by a deeply relaxing 10-minute massage using warm tealight candle wax, which delivers gentle heat and aromatherapy to relieve tension and leave your skin soft and revitalized. *Upgrade your nails with gel polish (shellac) for $20.' },
+          desc: '10-min massage. Enhanced Signature with exfoliation, hydrating lotion, paraffin wax and hot towel wrap. Gel +$20.',
+          full: '10-minute massage. An enhanced version of the Signature Manicure: nail trimming, cuticle care, exfoliation, hydrating lotion, paraffin wax, hot towel wrap, and your choice of regular polish. Followed by a 10-minute massage using warm tealight candle wax for gentle heat and aromatherapy. Upgrade to gel polish (shellac) for +$20.' },
       ]
     },
     pedicures: {
-      photo: 'Pedicure',
       items: [
-        { name: 'Classic Pedicure', price: '$35',
-          desc: '6-min massage, salt exfoliation, lotion, hot towel. All pedicures include soaking, trimming & cuticle care. +$20 gel upgrade.',
-          full: '6-minute massage. Salt exfoliation massage, nail trimming, cuticle cleaning, lotion, and hot towel. All pedicures include soaking, trimming, cuticle care, and regular polish. Upgrade to gel polish for +$20.' },
-        { name: 'Sugar Pedicure', price: '$40',
-          desc: '8-min massage, sugar scrub, hot stone or lotion massage. Scents: Lavender, Tropical. +$20 gel.',
-          full: '8-minute massage. Sugar scrub exfoliation, hot stone or lotion massage, hot towel wrap. Scent options: Lavender, Tropical. All pedicures include soaking, trimming, cuticle care, and regular polish. Upgrade to gel polish for +$20.' },
-        { name: 'Sugar & Mask Pedicure', price: '$50',
-          desc: '14-min massage, sugar exfoliation, mask, two hot towels, hot stone or paraffin wax. Scents: Orange, Cucumber Dream. +$20 gel.',
-          full: '14-minute massage. Sugar exfoliation massage, mask to smoothen skin, two hot towels, hot stone massage or paraffin wax. Scent options: Orange, Cucumber Dream. All pedicures include soaking, trimming, cuticle care, and regular polish. Upgrade to gel polish for +$20.' },
+        { name: 'Basic Pedicure', price: '$36',
+          desc: '5-min massage. Trim, shape and buff, cuticle care, callus remover, light scrub, leg and foot massage, hot towel. Gel +$20.',
+          full: '5-minute massage. Trim, shape, and buff toenails. Push back and remove excess cuticles. Callus remover solution to soften calluses and relieve cracked heels. Light scrub exfoliation. Massage for legs and feet. Hot towel wrap. Upgrade to gel polish (shellac) for +$20.' },
+        { name: 'Sugar Pedicure', price: '$42',
+          desc: '8-min massage. Sugar scrub exfoliation, hot stone lotion massage, hot towel wrap. Scents: Lavender, Tropical, Mango, Sugar #5. Gel +$20.',
+          full: '8-minute massage. Sugar scrub exfoliation, hot stone lotion massage, and hot towel wrap. Sugar scent options: Lavender, Tropical, Mango, Sugar #5. Upgrade to gel polish (shellac) for +$20.' },
+        { name: 'Sugar and Mask', price: '$50',
+          desc: '12-min massage. Sugar scrub, softening mask, warm towels, lotion massage, hot stone or paraffin. Scents: Orange, Cucumber Dream, Lemon, White Pearl. Gel +$20.',
+          full: '12-minute massage. Sugar scrub massage, skin-softening mask, warm towels, hydrating lotion massage, and your choice of hot stone massage or paraffin wax wrap. Scent options: Orange, Cucumber Dream, Lemon, White Pearl. Upgrade to gel polish (shellac) for +$20.' },
         { name: 'Deluxe Pedicure', price: '$60',
-          desc: '18-min massage, sugar exfoliation, mask, hot stone massage, paraffin wax. Scents: Rose, Milk & Honey. +$20 gel.',
-          full: '18-minute massage. Sugar exfoliation massage, mask, two hot towels, lotion massage, intensive hot stone massage, and paraffin wax. Scent options: Rose, Milk & Honey. All pedicures include soaking, trimming, cuticle care, and regular polish. Upgrade to gel polish for +$20.' },
-        { name: 'Volcano Spa Eruption', price: '$70',
-          desc: '25-min massage, 8-step detox with signature bubbling Volcano Eruption soak. Scents: Honey Suckle, Tropical Citrus. +$20 gel.',
-          full: '25-minute massage. An 8-step luxurious treatment designed to detoxify, exfoliate, and deeply hydrate your feet. Features the signature "Volcano Eruption" bubbling soak that revitalizes tired skin and melts away stress, leaving feet soft, smooth, and completely refreshed. 8 steps: Detox Volcano Crystals, Detox Volcano Activator, Exfoliating Sugar Scrub, Steamer, Collagen Organic Cream Mask, Collagen Organic Massage Lotion, Tealight Candle & Hot Stone Massage, Paraffin Hot Wax. Scent options: Honey Suckle, Tropical Citrus. Upgrade to gel polish for +$20.' },
-        { name: 'Collagen Spa Pedicure', price: '$80',
-          desc: '30-min massage, 9-step collagen-infused treatment for deep hydration. Scents: Crystal Waters, Spearmint. +$20 gel.',
-          full: '30-minute massage. A luxurious 9-step treatment infused with plant-based collagen, essential oils, and natural extracts to detoxify, exfoliate, deeply hydrate, and rejuvenate tired feet. Perfect for total relaxation, deep nourishment, and long-lasting silky-smooth results. 9 steps: Foot Bath Bomber, Collagen Crystals, Collagen Sugar Cane Scrub, Steamer, Collagen Cream Mask, Collagen Muscle-Relaxing Gel, Collagen Massage Lotion, Tealight Candle and Hot Stone Massage, Paraffin Hot Wax. Scent options: Crystal Waters, Spearmint. Upgrade to gel polish for +$20.' },
-        { name: 'Volcano Luxury Pedicure', price: '$100',
-          desc: '40-min massage, 10-step CBD-infused premium treatment. Scents: Rose Gold, Fuji Pearl. +$20 gel.',
-          full: '40-minute massage. A sophisticated 10-step upgrade featuring premium CBD-infused ingredients and a spectacular bubbling "Volcano Eruption" soak that detoxifies, softens, and refreshes skin while filling the room with a calming fragrance. Ideal for total relaxation, rejuvenation, and the soothing benefits of CBD-enhanced care. 10 steps: Foot Bath Bomber, CBD Detox Volcano Crystals, CBD Detox Volcano Activator, CBD Exfoliating Sugar Scrub, Steamer, CBD Collagen Cream Mask, CBD Collagen Massage Lotion, Tealight Candle and Hot Stone Massage, Paraffin Hot Wax. Scent options: Rose Gold, Fuji Pearl. Upgrade to gel polish for +$20.' },
-        { name: 'Ventana Herbal Pedicure', price: '$120',
-          desc: '50-min massage, 9-step botanical herbal escape with Dead Sea minerals. Scents: Eucalyptus, Lavender, Lemongrass, Rose, Tea Tree. +$20 gel.',
-          full: '50-minute massage. A refreshing botanical escape rich in herbs and natural ingredients to rejuvenate body, mind, and spirit. Pampers feet with nourishing herbal salts, gels, lotions, and masks combined with warm towels, hot stone massage, and paraffin wax for ultimate hydration and relaxation. Recommended for tired, dry, or sensitive feet. 9 steps: Foot Bath Bomber, Dead Sea Mineral Salt Soak, Steamer, Herbal Gel Application, Herbal Oil Massage, Herbal Lotion Massage, Herbal Mask, Tealight Candle and Hot Stone Massage, Paraffin Hot Wax. Scent options: Eucalyptus, Lavender, Lemongrass, Rose, Tea Tree. Upgrade to gel polish for +$20.' },
+          desc: '14-min massage. Double sugar scrub, smoothing mask, steamer, hot stone massage with candle wax, lotion massage, paraffin wrap. Gel +$20.',
+          full: '14-minute massage. Double sugar scrub massage, skin-smoothing mask, steamer, warm towels, hot stone massage with tealight candle wax, hydrating lotion massage, and paraffin wax wrap. Scent options: Rose, Orange, Green Tea, Milk & Honey, Cucumber, Lemongrass. Upgrade to gel polish (shellac) for +$20.' },
+        { name: 'Billionaire Spa', price: '$70',
+          desc: '18-min massage. Bubble salt soak, sugar scrub, cream mask, massage lotion, steamer, hot stone massage with candle wax. Gel +$20.',
+          full: '18-minute massage. Bubble salt soak, sugar scrub, cream mask, massage lotion, steamer, and hot stone massage with tealight candle wax. Scent options: Lavender, Coffee, Green Tea & Aloe Vera, Jasmine, Golden Rose. Upgrade to gel polish (shellac) for +$20.' },
+        { name: 'Bomb Spa', price: '$80',
+          desc: '22-min massage. 7-step treatment with pedi bomb, O2 bubble scrub, collagen mask and cream, steamer, hot stone massage. Gel +$20.',
+          full: '22-minute massage. A 7-step treatment: pedi bomb, dissolvable flowers, disposable pedi kit, callus remover, O2 bubble scrub, collagen mask treatment, and collagen massage cream. Plus steamer and hot stone massage with tealight candle wax. Scent options: Japanese Cherry Blossom, Hawaii Citrus, Mother of Pearl, Melon Mango, 24K Crazy Rich, Red Carpet. Upgrade to gel polish (shellac) for +$20.' },
+        { name: 'Collagen Spa Pedicure', price: '$90',
+          desc: '28-min massage. 9-step CBD treatment with plant-based collagen, steamer, hot stone massage and paraffin wax. Gel +$20.',
+          full: '28-minute massage. A 9-step CBD-enhanced treatment infused with plant-based collagen: foot bath bomber, collagen crystals soak, collagen sugar cane scrub, steamer, collagen cream mask, collagen muscle-relaxing gel, collagen massage lotion, tealight candle and hot stone massage, and paraffin hot wax. Scent options: Rose Gold, Crystal Waters, Fuji Pearl, Spearmint. Upgrade to gel polish (shellac) for +$20.' },
+        { name: 'Herbal Bliss Spa', price: '$100',
+          desc: '35-min massage. Foot detox and muscle relief. 5-step herbal treatment with Himalayan pink salt, clay mask and aromatherapy oil. Gel +$20.',
+          full: '35-minute massage. Dedicated to your well-being: foot detox and muscle relief. A 5-step treatment with Herbal Himalayan pink salt soak, Himalayan soothing scrub, clay mask, aromatherapy oil, and massage oil candle. Plus steamer and hot stone massage with tealight candle wax. Ingredients: shea butter, coconut oil, natural soy wax, olive oil, avocado oil, herbals, Himalayan pink salt, essential oil, glycerin, premium fragrance, no color added. Upgrade to gel polish (shellac) for +$20.' },
       ]
     },
     nails: {
-      photo: 'Nails',
       items: [
-        { name: 'Acrylic Full Set', price: '$55',
+        { name: 'Gel X', price: '$65',
+          desc: 'Pre-shaped soft gel extensions for a lightweight, natural-looking full set.',
+          full: 'Gel X full set. Pre-shaped soft gel extensions bonded to the natural nail for a lightweight, natural-looking finish that is gentle on the nail plate.' },
+        { name: 'Hybrid Gel', price: '$65', sub: 'Fill in $55',
+          desc: 'Acrylic strength with gel flexibility. Odorless, monomer-free and chip-free for 2 to 4 weeks.',
+          full: 'The best of both worlds. Combines the strength and durability of acrylic with the lightweight flexibility of gel polish. Applied in layers and cured under LED/UV lamp. Odorless, monomer-free, chip-free finish that lasts 2 to 4 weeks. Stronger than traditional gel, lighter than acrylic, and less damaging to the natural nail.' },
+        { name: 'Acrylic', price: '$55', sub: 'Fill in $47',
           desc: 'Beautiful, durable acrylic enhancements shaped to your preference.',
-          full: 'Professional acrylic nail enhancement for a durable, long-lasting full set.' },
-        { name: 'Acrylic Fill In', price: '$47',
-          desc: 'Maintain and refresh your existing acrylic set.',
-          full: 'Maintenance fill for existing acrylic nails.' },
-        { name: 'Full Set Liqui', price: '$60',
-          desc: 'Liquid acrylic full set for a smooth, natural-looking finish.',
-          full: 'Full set using liquid gel for a smooth, natural-looking finish.' },
-        { name: 'Color Powder Full Set', price: '$50',
+          full: 'Professional acrylic nail enhancement for a durable, long-lasting full set. Fill in available at $47.' },
+        { name: 'Builder', price: '$60', sub: 'Fill in $50',
+          desc: 'Builder gel full set for a smooth, natural-looking finish with added strength.',
+          full: 'Builder gel full set. Sculpted in layers for a smooth, natural-looking finish that adds strength and length. Fill in available at $50.' },
+        { name: 'Pink & White / Ombre', price: '$65', sub: 'Fill in $60',
+          desc: 'Classic French or dreamy ombre fade, timeless elegance.',
+          full: 'Classic French or trendy ombre gradient nail design. Fill in available at $60.' },
+        { name: 'Dip', price: '$50',
+          desc: 'Long-lasting dip powder with cuticle grooming and a relaxing hand massage.',
+          full: 'Dip powder application with cuticle grooming and a relaxing hand massage for a strong, lightweight finish.' },
+        { name: 'Full Set Color Powder', price: '$55', sub: 'Fill in $45 same color · $50 new color',
           desc: 'Vibrant color powder applied as a full set enhancement.',
-          full: 'Full set using colored acrylic powder for vibrant, chip-resistant color.' },
-        { name: 'Pink & White / Ombre', price: '$60',
-          desc: 'Classic French or dreamy ombre fade — timeless elegance.',
-          full: 'Classic French or trendy ombre gradient nail design.' },
-        { name: 'Fill In Liqui', price: '$50',
-          desc: 'Liquid acrylic fill-in to maintain your current set.',
-          full: 'Maintenance fill for existing liquid gel nails.' },
-        { name: 'Color Powder Refill (same)', price: '$40',
-          desc: 'Color powder refill — same color as your existing set.',
-          full: 'Refill using the same color powder as your previous set.' },
-        { name: 'Color Powder Refill (change)', price: '$45',
-          desc: 'Color powder refill — switch to a new color.',
-          full: 'Refill with a new color powder of your choice.' },
-        { name: 'Dip + Cuticle & Massage', price: '$50',
-          desc: 'Long-lasting dip powder with cuticle grooming and relaxing hand massage.',
-          full: 'Dip powder application with cuticle grooming and a relaxing hand massage.' },
-        { name: 'Hybrid Gel', price: '$65',
-          desc: 'Combines acrylic strength with gel flexibility. Odorless, monomer-free, chip-free finish lasting 2–4 weeks.',
-          full: 'The best of both worlds. Combines the strength and durability of acrylic with the lightweight flexibility of gel polish. Applied in layers and cured under LED/UV lamp. Odorless, monomer-free, chip-free finish that lasts 2–4 weeks. Stronger than traditional gel, lighter than acrylic, and less damaging to the natural nail.' },
-        { name: 'Gel Manicure', price: '$40',
-          desc: 'Chip-resistant gel polish with a lasting high-shine finish.',
-          full: 'Gel polish application for a glossy, chip-free finish lasting 2+ weeks.' },
+          full: 'Full set using colored acrylic powder for vibrant, chip-resistant color. Refill $45 with the same color, or $50 when changing to a new color.' },
         { name: 'Gel Color Only', price: '$30',
-          desc: 'Gel color application on existing nails — no shaping.',
-          full: 'Gel polish color application only, no manicure service included.' },
-        { name: 'Toe or Finger Color Change', price: '$15',
+          desc: 'Gel color application on existing nails, no shaping.',
+          full: 'Gel polish color application only. No manicure service included.' },
+        { name: 'Toe or Finger Nails Color Change', price: '$15',
           desc: 'Quick color swap on toes or fingernails.',
           full: 'Quick polish color change for toes or fingernails.' },
-        { name: 'Nail Removal Only', price: '$15',
-          desc: 'Safe, gentle removal of acrylic, gel, or dip.',
+        { name: 'Nails Remove Only', price: '$15',
+          desc: 'Safe, gentle removal of acrylic, gel or dip.',
           full: 'Safe removal of existing acrylic, gel, or dip powder nails.' },
-        { name: 'Nail Removal with Service', price: '$7',
+        { name: 'Nails Remove With Service', price: '$10',
           desc: 'Removal when combined with a new service.',
-          full: 'Nail removal included when booking another nail service.' },
-        { name: 'Paraffin', price: '$8',
-          desc: 'Warm paraffin wax treatment for ultra-soft hands or feet.',
-          full: 'Warm paraffin wax treatment for deep moisture and soft skin.' },
-        { name: 'Design', price: '$5+',
-          desc: 'Nail art and custom designs — ask your tech for options.',
-          full: 'Custom nail art and designs. Price varies by complexity.' },
-        { name: 'Shape', price: '$5',
-          desc: 'Custom nail shaping — square, almond, coffin, stiletto & more.',
-          full: 'Nail reshaping service to your preferred style.' },
-        { name: 'French or Color Tip', price: '$5',
-          desc: 'Classic French tips or custom color tip upgrade.',
-          full: 'Classic French tip or colored tip accent.' },
+          full: 'Nail removal at a reduced price when booked together with another nail service.' },
+        { name: 'Shape · Cut Down & Reshape', price: '$5',
+          desc: 'Custom nail shaping: square, almond, coffin, stiletto and more.',
+          full: 'Cut down and reshape your nails to your preferred style: square, almond, coffin, stiletto and more.' },
         { name: 'Length', price: '$5+',
           desc: 'Additional length added to any nail service.',
-          full: 'Extra charge for additional nail length. Price varies.' },
-        { name: 'Add Gel Color to Service', price: '$20',
-          desc: 'Upgrade any service with long-lasting gel color.',
-          full: 'Upgrade any service with gel polish for a long-lasting finish.' },
-        { name: 'Extra Massage', price: '$1/min',
-          desc: 'Extend your relaxation with additional massage time.',
-          full: 'Additional massage time at $1 per minute.' },
+          full: 'Extra charge for additional nail length, starting at $5. Price varies with the length you choose.' },
+        { name: 'Design', price: '$5+',
+          desc: 'Nail art and custom designs, ask your tech for options.',
+          full: 'Custom nail art and designs, starting at $5. Price varies by complexity.' },
+        { name: 'French', price: '$5–$40',
+          desc: 'Classic French tips or a custom color tip upgrade.',
+          full: 'Classic French tip or colored tip accent, from $5 to $40 depending on the style and nail length.' },
       ]
     },
     waxing: {
-      photo: 'Waxing',
       items: [
         { name: 'Eyebrows', price: '$12',
           desc: 'Perfectly shaped brows with precise, gentle waxing.',
           full: 'Professional eyebrow shaping and hair removal.' },
-        { name: 'Chin or Lip', price: '$10',
+        { name: 'Lip or Chin', price: '$10+',
           desc: 'Quick and clean waxing for smooth, hair-free skin.',
-          full: 'Gentle facial hair removal for chin or upper lip area.' },
-        { name: 'Full Arm', price: '$45',
-          desc: 'Smooth, hair-free arms — wrist to shoulder.',
-          full: 'Complete hair removal for both arms, wrist to shoulder.' },
-        { name: 'Half Arm', price: '$35',
-          desc: 'Waxing from wrist to elbow for quick refreshing results.',
-          full: 'Hair removal for lower or upper arm section.' },
-        { name: 'Full Leg', price: '$55',
-          desc: 'Complete leg waxing from ankle to upper thigh.',
-          full: 'Complete hair removal for both legs, ankle to upper thigh.' },
-        { name: 'Half Leg', price: '$35',
-          desc: 'Waxing from ankle to knee — perfect for seasonal upkeep.',
-          full: 'Hair removal for lower or upper leg section.' },
-        { name: 'Under Arms', price: '$25',
-          desc: 'Gentle underarm waxing for long-lasting smoothness.',
-          full: 'Quick and clean underarm hair removal.' },
-        { name: 'Back', price: '$45',
-          desc: 'Full back waxing for clean, confident skin.',
-          full: 'Full back hair removal for smooth, clean results.' },
-        { name: 'Whole Face', price: '$40',
+          full: 'Gentle facial hair removal for the upper lip or chin area, starting at $10.' },
+        { name: 'Whole Face', price: '$45+',
           desc: 'Complete facial waxing for smooth, hair-free skin everywhere.',
-          full: 'Complete facial hair removal including forehead, cheeks, chin, upper lip, and sideburns.' },
+          full: 'Complete facial hair removal including forehead, cheeks, chin, upper lip, and sideburns, starting at $45.' },
+        { name: 'Full Arms', price: '$55+',
+          desc: 'Smooth, hair-free arms from wrist to shoulder.',
+          full: 'Complete hair removal for both arms, wrist to shoulder, starting at $55.' },
+        { name: 'Half Arms', price: '$35+',
+          desc: 'Waxing from wrist to elbow for quick, refreshing results.',
+          full: 'Hair removal for the lower or upper arm section, starting at $35.' },
+        { name: 'Underarms', price: '$25+',
+          desc: 'Gentle underarm waxing for long-lasting smoothness.',
+          full: 'Quick and clean underarm hair removal, starting at $25.' },
+        { name: 'Full Legs', price: '$55+',
+          desc: 'Complete leg waxing from ankle to upper thigh.',
+          full: 'Complete hair removal for both legs, ankle to upper thigh, starting at $55.' },
+        { name: 'Half Legs', price: '$40+',
+          desc: 'Waxing from ankle to knee, perfect for seasonal upkeep.',
+          full: 'Hair removal for the lower or upper leg section, starting at $40.' },
+        { name: 'Back', price: '$45+',
+          desc: 'Full back waxing for clean, confident skin.',
+          full: 'Full back hair removal for smooth, clean results, starting at $45.' },
+        { name: 'Brows Tinting', price: '$45+',
+          desc: 'Semi-permanent tint that deepens and defines your brows.',
+          full: 'Semi-permanent brow tinting to deepen colour, fill sparse areas, and define the shape of your brows, starting at $45.' },
+      ]
+    },
+    eyelash: {
+      items: [
+        { name: 'Eyelash Strips', price: '$25',
+          desc: 'Full strip lashes applied for instant volume, perfect for an event.',
+          full: 'Full strip lashes applied and shaped to your eye for instant volume and length. A great choice for weddings, photos, and nights out.' },
+        { name: 'Eyelash Individuals', price: '$120',
+          desc: 'Individual lashes applied one by one for a natural, long-lasting look.',
+          full: 'Individual lashes applied one at a time to your natural lashes for a customized, natural-looking set that lasts. Includes shaping to suit your eye.' },
+        { name: 'Eye Lash Cluster', price: '$45',
+          desc: 'Small clusters for fuller lashes in less time than individuals.',
+          full: 'Small clusters of lashes placed along the lash line for fuller, fluffier eyes in less time than a full individual set.' },
       ]
     }
   };
@@ -1447,7 +1559,9 @@ footer { background: var(--sand); padding-top: 72px; }
         <div class="drinks-note">${esc(t('drinks.note'))}</div>`;
     } else {
       const cat = data[tab];
-      const rows = cat.items.map((s, i) => `
+      const rows = cat.items.map((s, i) => {
+        const sub = svcText(tab, i, 'sub', s.sub || '');
+        return `
         <div class="menu-row">
           <div class="menu-row-main">
             <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="svc-${tab}-${i}">
@@ -1455,17 +1569,25 @@ footer { background: var(--sand); padding-top: 72px; }
               <span class="menu-short">${esc(svcText(tab, i, 'desc', s.desc))}</span>
               <span class="menu-hint">${esc(t('svc.see'))}</span>
             </button>
-            <span class="menu-price">${esc(s.price)}</span>
+            <span class="menu-price">${esc(s.price)}${sub ? `<small>${esc(sub)}</small>` : ''}</span>
             <a href="${esc(LINKS.BOOKING)}" target="_blank" rel="noopener" class="menu-book">${esc(t('svc.book'))}</a>
           </div>
           <div class="menu-more" id="svc-${tab}-${i}"><div class="menu-more-inner"><p>${esc(svcText(tab, i, 'full', s.full))}</p></div></div>
-        </div>`).join('');
+        </div>`; }).join('');
       wrap.innerHTML = `<div class="menu-list">${rows}</div>`;
     }
-    // the photo beside the list
+    // The photo beside the list. A category with no entry in SERVICE_IMG simply shows no photo
+    // (Eyelashes today) — add one line to SERVICE_IMG once you have a photo for it.
     const img = SERVICE_IMG[tab];
-    menuPhoto.src = img.src; menuPhoto.width = img.w; menuPhoto.height = img.h;
-    menuPhoto.alt = tab === 'drinks' ? t('drinks.alt').replace('{name}', drinkName(0)) : t('svc.alt.' + tab);
+    const fig = menuPhoto.closest('.menu-photo');
+    if (img) {
+      fig.hidden = false;
+      menuPhoto.src = img.src; menuPhoto.width = img.w; menuPhoto.height = img.h;
+      menuPhoto.alt = tab === 'drinks' ? t('drinks.alt').replace('{name}', drinkName(0)) : t('svc.alt.' + tab);
+    } else {
+      fig.hidden = true;
+      menuPhoto.removeAttribute('src'); menuPhoto.alt = '';
+    }
   }
 
   /* ─── TAB SWITCHING (click + keyboard arrows, ARIA tablist) ─── */
@@ -1694,6 +1816,13 @@ footer { background: var(--sand); padding-top: 72px; }
     $('#heroToday').textContent = today ? `${today.open} – ${today.close}` : t('hero.closedToday');
   }
 
+  /* ─── SALON POLICY LIST (built from the translations so it works in both languages) ─── */
+  const POLICY_COUNT = 9;
+  function renderPolicy() {
+    $('#policyList').innerHTML = Array.from({ length: POLICY_COUNT }, (_, i) =>
+      `<li class="policy-item"><span class="policy-num">${String(i + 1).padStart(2, '0')}</span><span>${esc(t('policy.' + (i + 1)))}</span></li>`).join('');
+  }
+
   /* ─── LANGUAGE: overlay on first visit, EN / ES switch in the header, choice remembered ─── */
   const overlay = $('#langOverlay');
   const langOpts = $$('.lang-opt');
@@ -1710,6 +1839,7 @@ footer { background: var(--sand); padding-top: 72px; }
     langOpts.forEach(b => { const on = b.dataset.lang === lang; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
     renderServices(currentTab);
     renderHours();
+    renderPolicy();
     labelDots();
     document.documentElement.setAttribute('data-i18n-ready', '');
   }

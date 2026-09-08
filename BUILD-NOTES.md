@@ -6,7 +6,7 @@ Built 2026-09-01/02 from `~/ventana-nails-spa-richmond/index.html` (1,706 lines,
 
 - One plain `index.html`, no frameworks, no build step, same `images/` file names.
 - Section order: language overlay → header → hero → intro → services → reviews → gallery → features → hours/location → footer → mobile Call/Book bar.
-- The services `data` object (42 services: 3 manicures, 8 pedicures, 22 nails, 9 waxing) — copied programmatically and verified byte-for-byte. Prices and descriptions are exactly Richmond's.
+- One plain page, the same section order, the gold accent, the tabbed service menu and the lazy Drinks tab. The service list itself is now Katy's own (see "Menu rewrite" below) and no longer matches Richmond.
 - The Ventana gold (#D4AF37 / #E6C550 / #C5A028 / #FBF5DC), the 5 service tabs, the "See Details ▼" expand, a per-service Book button, the lazy-built Drinks tab, fade-up-on-scroll animations, smooth scrolling, the 220 ms tab fade.
 
 ## The Katy look (version 2) — what is different from Richmond
@@ -117,3 +117,27 @@ Two free accounts. GitHub stores your files; Vercel publishes them and gives you
 1. In Vercel: your project → **Settings → Domains** → type the domain → **Add**. Vercel shows one or two DNS records to enter at the company you bought the domain from; copy them exactly. It usually goes live within an hour and HTTPS is automatic.
 2. In the folder: Find & Replace `https://REPLACE-WITH-YOUR-DOMAIN.example` → `https://your-domain.com` in `index.html`, `robots.txt` and `sitemap.xml`. Commit and push (step D).
 3. Optional but worth it: search.google.com/search-console → add your domain → submit `https://your-domain.com/sitemap.xml`.
+
+## Menu rewrite (2026-09-08)
+
+The whole service menu was replaced with Katy's own pricing. It no longer matches Richmond.
+
+| Category | Items | Notes |
+|---|---|---|
+| Manicures | 3 | $20 / $40 / $50, descriptions rewritten |
+| Pedicures | 8 | Basic $36 · Sugar $42 · Sugar and Mask $50 · Deluxe $60 · Billionaire Spa $70 · Bomb Spa $80 · Collagen Spa $90 · Herbal Bliss Spa $100. The two Volcano treatments and the old Ventana Herbal are gone |
+| Nail Enhancement | 15 | Renamed from "Nails". Gel X, Hybrid Gel, Acrylic, Builder, Pink & White / Ombre, Dip, Full Set Color Powder, then 8 à la carte items |
+| Waxing | 10 | New prices, and Brows Tinting added |
+| Eyelashes | 3 | **New category and new tab**: Strips $25, Individuals $120, Cluster $45 |
+| Drinks Menu | 32 | Unchanged |
+
+Supporting changes:
+
+- **Two-price services.** Items with a fill-in price use a new optional `sub` field, printed as a small grey line under the main price ("Fill in $47"). Translated separately in Spanish ("Relleno $47").
+- **Category photo is now optional.** A category with no entry in `SERVICE_IMG` hides the photo frame instead of breaking. Eyelashes has no photo yet; adding `eyelash: { src: 'images/service-eyelash.jpg', w: …, h: … }` to `SERVICE_IMG` turns it on.
+- **Salon Policy section** added between Location and the footer, linked from the top menu, the phone menu and the footer. Its 9 lines are stored as translations (`policy.1`…`policy.9`) and rendered by `renderPolicy()`, so they switch language with everything else. The count is controlled by `POLICY_COUNT`.
+- The source text said "Apollo Nails & Spa Policy". That is a different business name, so the heading reads "Salon Policy" and the site name stays Ventana throughout.
+- The source was written for a kiosk app ("add as a screen accessible from the main menu"); on the website that became a page section reachable from the navigation.
+- Translation dictionary grew from 126 to 142 keys per language, still at full parity.
+
+Verified in headless Chrome at 1440 and 375: no console errors, no failed requests, all six tabs render the right rows and prices, fill-in sub-prices show in both languages, expanding a row works, the Eyelashes tab hides the photo and the other tabs bring it back, the policy list renders 9 numbered items in both languages, the wider navigation still fits, and there is no sideways overflow on a phone.

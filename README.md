@@ -41,6 +41,7 @@ Photos are found by **file name**, so you only need to give your new photos the 
 | `service-pedicure.jpg` | Photo beside the Pedicures list, **and the small photo at the top of the page** | Tall (portrait) |
 | `service-nails.jpg` | Photo beside the Nails list | Tall (portrait) |
 | `service-waxing.jpg` | Photo beside the Waxing list | Tall (portrait) |
+| `service-eyelash.jpg` | Not used yet. The Eyelashes list shows no photo until you add one, then tell me and I will switch it on | Tall (portrait) |
 | `drink-1.jpg` … `drink-32.jpg` | Drinks Menu tab (in menu order). `drink-1.jpg` is also the photo beside that tab | Tall (portrait), 1080 × 1920 |
 
 Then shrink the new photos so the site stays fast:
@@ -80,7 +81,16 @@ const CONFIG = {
 ```
 
 - **Hours**: `days` uses numbers — 0 is Sunday, 1 Monday … 6 Saturday. The hours table, the footer, the green "Open today" badge at the top, and the search-engine data all read this one list.
-- **Prices and service descriptions** are in the `data` block right below the translations (identical to Richmond). Spanish versions of the same services are in `T.es.services`, in the same order.
+- **Prices and service descriptions** are in the `data` block right below the translations. Spanish versions of the same services are in `T.es.services`, in the same order — if you add a service to one, add it to the other in the same position.
+- Each service looks like this. `sub` is optional and prints the small grey line under the price (used for fill-in prices):
+
+```js
+{ name: 'Acrylic', price: '$55', sub: 'Fill in $47',
+  desc: 'Short line shown in the list.',
+  full: 'The longer text revealed by See Details.' },
+```
+
+- **Salon Policy** lines live in the translations as `policy.1` … `policy.9` (plus `policy.lead` and `policy.thanks`). To add a tenth line, add `policy.10` in both languages and change `POLICY_COUNT` just above the language section.
 
 ## How to put it on the internet (GitHub + Vercel)
 
