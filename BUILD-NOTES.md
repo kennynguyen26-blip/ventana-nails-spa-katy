@@ -136,7 +136,8 @@ The whole service menu was replaced with Katy's own pricing. It no longer matche
 Supporting changes:
 
 - **Two-price services.** Items with a fill-in price use a new optional `sub` field, printed as a small grey line under the main price ("Fill in $47"). Translated separately in Spanish ("Relleno $47").
-- **Category photo is now optional.** A category with no entry in `SERVICE_IMG` hides the photo frame instead of breaking. Eyelashes has no photo yet; adding `eyelash: { src: 'images/service-eyelash.jpg', w: …, h: … }` to `SERVICE_IMG` turns it on.
+- **Category photo is now optional.** A category with no entry in `SERVICE_IMG` hides the photo frame instead of breaking. Eyelashes was wired up on 2026-09-12 with `images/service-eyelash.jpg` (740 × 492). Note that photo shows eyebrow waxing rather than lashes; replacing the file is all that is needed to change it.
+- **Landscape category photos keep their own shape.** The frame is 4/5 for portrait photos as before, but a photo wider than it is tall gets its natural ratio so it is not cropped into a close-up.
 - **Salon Policy section** added between Location and the footer, linked from the top menu, the phone menu and the footer. Its 9 lines are stored as translations (`policy.1`…`policy.9`) and rendered by `renderPolicy()`, so they switch language with everything else. The count is controlled by `POLICY_COUNT`.
 - The source text was headed "Apollo Nails & Spa Policy". The owner confirmed to ignore the name, so the heading reads "Salon Policy" and the site name stays Ventana throughout.
 - The source was written for a kiosk app; the owner confirmed to ignore that, so on the website it became a page section reachable from the navigation.

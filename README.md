@@ -41,7 +41,7 @@ Photos are found by **file name**, so you only need to give your new photos the 
 | `service-pedicure.jpg` | Photo beside the Pedicures list, **and the small photo at the top of the page** | Tall (portrait) |
 | `service-nails.jpg` | Photo beside the Nails list | Tall (portrait) |
 | `service-waxing.jpg` | Photo beside the Waxing list | Tall (portrait) |
-| `service-eyelash.jpg` | Not used yet. The Eyelashes list shows no photo until you add one, then tell me and I will switch it on | Tall (portrait) |
+| `service-eyelash.jpg` | Photo beside the Eyelashes list | Tall (portrait) |
 | `drink-1.jpg` … `drink-32.jpg` | Drinks Menu tab (in menu order). `drink-1.jpg` is also the photo beside that tab | Tall (portrait), 1080 × 1920 |
 
 Then shrink the new photos so the site stays fast:

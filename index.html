@@ -1124,6 +1124,7 @@ footer { background: var(--sand); padding-top: 72px; }
       'svc.alt.pedicures': 'Freshly pedicured feet with a pink orchid on a wooden floor',
       'svc.alt.nails': 'Long almond nails with a dark green and nude swirl design',
       'svc.alt.waxing': "Esthetician waxing a client's leg with a wax strip, rose petals nearby",
+      'svc.alt.eyelash': "Esthetician applying wax to a client's eyebrow during a lash and brow service",
       'drinks.title': 'Complimentary Drinks Menu',
       'drinks.sub': 'Enjoy a refreshing beverage on us during your visit — 32 drink options available!',
       'drinks.note': 'All drinks are complimentary with any service',
@@ -1199,6 +1200,7 @@ footer { background: var(--sand); padding-top: 72px; }
       'svc.alt.pedicures': 'Pies con pedicura recién hecha junto a una orquídea rosa sobre piso de madera',
       'svc.alt.nails': 'Uñas almendra largas con diseño de remolinos en verde oscuro y nude',
       'svc.alt.waxing': 'Esteticista depilando la pierna de una clienta con banda de cera, con pétalos de rosa alrededor',
+      'svc.alt.eyelash': 'Esteticista aplicando cera en la ceja de una clienta durante un servicio de pestañas y cejas',
       'drinks.title': 'Menú de Bebidas de Cortesía',
       'drinks.sub': 'Disfruta una bebida refrescante por nuestra cuenta durante tu visita: ¡32 opciones para elegir!',
       'drinks.note': 'Todas las bebidas son de cortesía con cualquier servicio',
@@ -1565,6 +1567,7 @@ footer { background: var(--sand); padding-top: 72px; }
     pedicures: { src: 'images/service-pedicure.jpg', w: 418, h: 626 },
     nails:     { src: 'images/service-nails.jpg',    w: 720, h: 960 },
     waxing:    { src: 'images/service-waxing.jpg',   w: 417, h: 626 },
+    eyelash:   { src: 'images/service-eyelash.jpg', w: 740, h: 492 },
     drinks:    { src: 'images/drink-1.jpg',          w: 1080, h: 1920 }
   };
   const DRINK_W = 1080, DRINK_H = 1920;
@@ -1624,6 +1627,9 @@ footer { background: var(--sand); padding-top: 72px; }
     const fig = menuPhoto.closest('.menu-photo');
     if (img) {
       fig.hidden = false;
+      // A landscape photo keeps its own shape so it is not cropped to a close-up;
+      // portrait photos use the tall 4/5 frame from the stylesheet.
+      fig.style.aspectRatio = img.w > img.h ? img.w + ' / ' + img.h : '';
       menuPhoto.src = img.src; menuPhoto.width = img.w; menuPhoto.height = img.h;
       menuPhoto.alt = tab === 'drinks' ? t('drinks.alt').replace('{name}', drinkName(0)) : t('svc.alt.' + tab);
     } else {
